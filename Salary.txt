@@ -1,0 +1,37 @@
+#include <iostream>
+#include <iomanip>
+#include <vector>    
+using namespace std; 
+
+int main()
+{
+   const int NUM_EMPLOYEES = 5;           // So luong nhan vien
+   vector<int> hours(NUM_EMPLOYEES);      // Mot vector hours kieu int
+   vector<double> payRate(NUM_EMPLOYEES); // Mot vector payRate kieu
+                                                               //double
+   int index;                             
+
+   // Nhap du lieu
+   cout << "Nhap so gio lam viec cua nhan vien " << NUM_EMPLOYEES << endl;
+   cout << "Nhan vien va muc luong hang gio cua ho: " << endl;
+   for (index = 0; index < NUM_EMPLOYEES; index++)
+   {
+      cout << "So gio lam viec cua nhan vien #" << (index + 1);
+      cout << ": ";
+      cin >> hours[index];
+      cout << "Ty le tra luong hang gio cho nhan vien #";
+      cout << (index + 1) << ": ";
+      cin >> payRate[index];
+   }
+
+   // In ra du lieu nhap vao
+   cout << "Day la tong luong cho moi nhan vien: " << endl;;
+   cout << fixed << showpoint << setprecision(2);
+   for (index = 0; index < NUM_EMPLOYEES; index++)
+   {
+      double grossPay = hours[index] * payRate[index];
+      cout << "Nhan vien #" << (index + 1);
+      cout << ": $" << grossPay << endl;
+   }
+   return 0;
+} 
