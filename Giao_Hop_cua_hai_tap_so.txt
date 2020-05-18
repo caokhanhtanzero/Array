@@ -1,0 +1,109 @@
+#include <iostream>
+using namespace std;
+int k = 0;
+
+void NhapMang(int a[], int &n)
+{
+    for(int i = 0; i<n ; i++)
+    {
+	    cout << "Nhap phan tu thu " << i + 1 << " : ";
+        cin >> a[i];
+    }
+}
+int XuatMang(int a[],int n)
+    {
+        for(int i=0;i<n;i++)
+    {
+	    cout << a[i] << " ";
+    }
+}
+
+void Xoa(int a[], int &n, int vitrixoa)
+{
+	for(int i = vitrixoa + 1; i < n; i++)
+	{
+		a[i - 1] = a[i];
+	}
+	n--; // số lượng phần tử mảng giảm
+}
+
+// hàm xử lí xóa các phần tử trùng nhau
+void Xoa_Phan_Tu_Trung(int a[], int &n)
+{
+	// vòng lặp duyệt từng phần tử của mảng
+	for(int i = 0; i < n - 1; i++)
+	{
+		// vòng lặp duyệt các phần tử nằm sau a[i] - nếu phía sau a[i] mà có phần tử a[j] trùng v?i a[i] thì xóa ph?n t? a[j] - tuong duong xóa ph?n t? t?i v? trí j
+		for(int j = i + 1; j < n; j++)
+		{
+			if(a[i] == a[j])
+			{
+				Xoa(a, n, j);
+				i--; // nếu không có i-- sẽ xảy ra lỗi gì ? "bỏ qua một số phần tử trùng"
+			}
+		}
+	}
+}
+
+int swap(int a[], int n) {
+	int tg;
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = i + 1; j < n; j++) {
+            if (a[i] > a[j]) {
+                tg = a[i];
+                a[i] = a[j];
+                a[j] = tg;        
+            }
+        }
+    }
+}
+void Ghep(int a[], int n, int b[], int m, int c[], int &h)
+{
+    h = m + n;
+    for (int i = 0; i < h; i++)
+        if (i < n)
+            c[i] = a[i];
+        else
+            c[i] = b[i-n];
+      
+}
+
+void Giao(int a[], int n, int b[], int m, int d[], int &k) {
+	for (int i = 0; i < n; i++) {
+	    for (int j = 0; j < m; j++) {
+		    if (a[i] == b[j]) {
+			    d[k] = a[i];
+			    k ++;
+			}
+		}
+	}
+}
+
+int main()
+{
+    int a[100], b[100], c[100], d[100], n, m, h;
+    cout << "Nhap so luong phan tu cho hai tap so.\n";
+    cout << "\nSo luong phan tu cua tap thu nhat: ";
+    cin >> n;
+    cout << "\nSo luong phan tu cua tap thu hai: ";
+    cin >> m;
+    cout << "---------------------------------------";
+    cout << "\nNhap gia tri cho mang thu nhat.\n\n";
+    NhapMang(a, n);
+    cout << "---------------------------------------";   
+    cout << "\nNhap gia tri cho mang thu hai.\n";
+    cout << "\n";
+    NhapMang(b, m);
+    cout << "---------------------------------------";
+    cout << "\nHop cua hai tap tren la:\n";
+    Ghep(a, n, b, m, c, h);
+    swap(c, h);
+    Xoa_Phan_Tu_Trung(c, h);
+    XuatMang(c, h);
+    cout << "\n---------------------------------------";
+    cout << "\nGiao cua hai tap tren la:\n";
+    Giao(a, n, b, m, d, k);
+    swap(d, k);
+    Xoa_Phan_Tu_Trung(d, k);
+    XuatMang(d, k);
+}
