@@ -1,0 +1,55 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+void nhap(int *a, int *n) {
+	*n = 0;
+	while(*n <= 0) {
+		cout << "Nhap n > 0: ";
+		cin >> *n;
+	}
+	for(int i = 0; i < (*n - 1); i++) {
+		cout << "a[" << i << "] = ";
+		cin >> a[i];
+	}
+}
+
+int nhapK(int n) {
+	int k = -1;
+	while(k < 0 || k >= n) {
+		cout << "Nhap k(0 <= k < n): ";
+		cin >> k;
+	}
+	return k;
+}
+
+void chen(int *a, int n, int k, int x) {
+	for(int i = n-1; i > k; i--) {
+		a[i] = a[i - 1];
+	}
+	a[k] = x;
+}
+
+void hienThi(int *a, int n) {
+	int i;
+	for(i = 0; i < n; i++) {
+		cout << setw(10) << a[i];
+	}
+}
+
+int main() {
+	int n;
+	int a[100];
+	int k, x;
+	
+	nhap(a, &n);
+	k = nhapK(n);
+	
+	cout << "Nhap x: ";
+	cin >> x;
+	
+	chen(a, n, k, x);
+	hienThi(a, n);
+	
+	return 0;
+}
