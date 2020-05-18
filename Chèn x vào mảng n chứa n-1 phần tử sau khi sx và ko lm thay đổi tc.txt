@@ -1,0 +1,69 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+void nhap(int *a, int *n) {
+	*n = 0;
+	while(*n <= 0) {
+		cout << "Nhap n > 0: ";
+		cin >> *n;
+	}
+	for(int i = 0; i < *n - 1; i++) {
+		cout << "a[" << i << "] = ";
+		cin >> a[i];
+	}
+}
+
+void sapXep(int *a, int n) {
+	for(int i = 0; i < n - 1; i++) {
+		for(int j = n - 1; j > i; j--) {
+			if(a[j] < a[j - 1]) {
+				int t = a[j];
+				a[j] = a[j - 1];
+				a[j - 1] = t;
+			}
+		}
+	}
+}
+
+int timViTri(int *a, int n, int x) {
+	if(x < a[0]) {
+		return 0;
+	}
+	if(x > a[n-1]) {
+		return n;
+	}
+	for(int i = 0; i < n; i++) {
+		if(a[i] >= x) {
+			return i;
+		}
+	}
+}
+
+void chen(int *a, int n, int k, int x) {
+	for(int i = n - 1; i > k; i--) {
+		a[i] = a[i - 1];
+	}
+	a[k] = x;
+}
+
+void hienThi(int *a, int n) {
+	int i;
+	for(i = 0; i < n; i++) {
+		cout << setw(10) << a[i];
+	}
+}
+
+int main() {
+	int n;
+	int a[100];
+	nhap(a, &n);
+	sapXep(a, n - 1);
+	int x;
+	cout << "Nhap x: ";
+	cin >> x;
+	int v = timViTri(a, n - 1, x);
+	chen(a, n, v, x);
+	hienThi(a, n);
+	return 0;
+}
