@@ -1,0 +1,26 @@
+void Xoa(int a[], int &n, int vitrixoa)
+{
+	for(int i = vitrixoa + 1; i < n; i++)
+	{
+		a[i - 1] = a[i];
+	}
+	n--; // số lượng phần tử mảng giảm
+}
+
+// hàm xử lí xóa các phầnn tử trùng nhau
+void Xoa_Phan_Tu_Trung(int a[], int &n)
+{
+	// vòng lặp duyệt từng phần tử của mảng
+	for(int i = 0; i < n - 1; i++)
+	{
+		// vòng lặp duyệt các phần tử nằm sau a[i] - nếu phía sau a[i] mà có phần tử a[j] trùng với a[i] thì xóa phần tử a[j] - tương dương xóa phần tử tại vị trí j
+		for(int j = i + 1; j < n; j++)
+		{
+			if(a[i] == a[j])
+			{
+				Xoa(a, n, j);
+				i--; // nếu không có i-- sẽ xảy ra lỗi gì ?
+			}
+		}
+	}
+}
